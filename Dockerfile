@@ -1,6 +1,12 @@
 FROM debian:stable-slim
-MAINTAINER Jesse B. Crawford <admin@jbcrawford.us>
-ENV UNREALIRCD_VERSION 4.0.8
+ARG UNREALIRCD_VERSION=4.2.0
+
+# Services
+EXPOSE 6666
+# Plaintext
+EXPOSE 6667
+# SSL/TLS
+EXPOSE 6697
 
 RUN apt-get update && \
 	apt-get install -y build-essential curl libssl-dev ca-certificates libcurl4-openssl-dev zlib1g sudo  && \
@@ -24,5 +30,4 @@ RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org
 	rm -rf unrealircd-$UNREALIRCD_VERSION && \
 	chmod +x /data/unrealircd/unrealircd
 
-USER unrealircd
 ENTRYPOINT /data/unrealircd/bin/unrealircd -F
