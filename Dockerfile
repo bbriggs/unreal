@@ -7,7 +7,6 @@ EXPOSE 6666
 EXPOSE 6667
 # SSL/TLS
 EXPOSE 6697
-
 RUN apt-get update && \
 	apt-get install -y build-essential curl libssl-dev ca-certificates libcurl4-openssl-dev zlib1g sudo  && \
 	apt-get clean
@@ -30,4 +29,5 @@ RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org
 	rm -rf unrealircd-$UNREALIRCD_VERSION && \
 	chmod +x /data/unrealircd/unrealircd
 
+USER unrealircd
 ENTRYPOINT /data/unrealircd/bin/unrealircd -F
