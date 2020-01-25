@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-ARG UNREALIRCD_VERSION=4.2.3
+ARG VERSION=5.0.2
 
 # Services
 EXPOSE 6666
@@ -12,8 +12,8 @@ RUN apt-get update && \
 	apt-get clean
 
 RUN mkdir /data && useradd -r -d /data unrealircd && chown unrealircd:unrealircd /data
-RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org/unrealircd4/unrealircd-$UNREALIRCD_VERSION.tar.gz | sudo -u unrealircd tar xz && \
-	cd unrealircd-$UNREALIRCD_VERSION && \
+RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org/unrealircd4/unrealircd-$VERSION.tar.gz | sudo -u unrealircd tar xz && \
+	cd unrealircd-$VERSION && \
 	sudo -u unrealircd ./Config \
       --with-showlistmodes \
       --with-listen=5 \
@@ -26,7 +26,7 @@ RUN cd /data && sudo -u unrealircd curl -s --location https://www.unrealircd.org
     sudo -u unrealircd make && \
     sudo -u unrealircd make install && \
 	cd /data && \
-	rm -rf unrealircd-$UNREALIRCD_VERSION && \
+	rm -rf unrealircd-$VERSION && \
 	chmod +x /data/unrealircd/unrealircd
 
 USER unrealircd
