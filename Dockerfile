@@ -8,7 +8,7 @@ EXPOSE 6667
 # SSL/TLS
 EXPOSE 6697
 RUN apt-get update && \
-	apt-get install -y build-essential curl libssl-dev ca-certificates libcurl4-openssl-dev zlib1g sudo  && \
+	apt-get install -y build-essential curl libssl-dev ca-certificates libcurl4-openssl-dev zlib1g sudo python3 && \
 	apt-get clean
 
 RUN mkdir /data && useradd -r -d /data unrealircd && chown unrealircd:unrealircd /data
